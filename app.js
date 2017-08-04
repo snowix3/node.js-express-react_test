@@ -10,6 +10,12 @@ var users = require('./routes/users');
 
 var app = express();
 
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('express!!');
+}).listen(3000, 'localhost');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
