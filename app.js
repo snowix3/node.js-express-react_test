@@ -9,16 +9,25 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
+var expressReactViews = require('express-react-views');
 var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('express!!');
-}).listen(3000, 'localhost');
+app.get('/', function (req, res) {
+  // res.send('Hello World!');
+  res.render('index', { title: 'Express'})
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+})
+// http.createServer(function (req, res) {
+//   res.writeHead(200, {'Content-Type': 'text/plain'});
+//   res.end('express!!');
+// }).listen(3000, 'localhost');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'jsx');
+app.engine('jsx', expressReactViews.createEngine());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
